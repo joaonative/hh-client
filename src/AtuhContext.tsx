@@ -1,5 +1,11 @@
 import axios from "axios";
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 //props do contexto
 interface AuthContextProps {
@@ -7,6 +13,7 @@ interface AuthContextProps {
   login: (access_token: string) => Promise<void>;
   logout: () => void;
   errors: string;
+  userData: UserData | null;
 }
 
 //props do provedor
@@ -14,10 +21,24 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
+//dados do usuario logado
+interface UserData {
+  name: string;
+  given_name: string;
+  email: string;
+  picture: string;
+}
+
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [errors, setErrors] = useState("");
+
+  const [userData, setUserData] = useState<UserData | null>(() => {
+    // tentamos recuperar as informacoes do usuario ao iniciar a aplicacao
+    const storedUserData = localStorage.getItem("user-data");
+    return storedUserData ? JSON.parse(storedUserData) : null;
+  });
 
   const [isLoggedIn, setLoggedIn] = useState<boolean>(() => {
     //verifica se ja tem o token baseado no valor automaticamente devolve isLoggedIn como true
@@ -38,8 +59,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       );
 
       //guardamos a resposta do google
-      const { name, email } = googleRes.data;
-
+      const { name, email, picture, given_name } = googleRes.data;
+      console.log(googleRes.data);
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        name,
+        email,
+        picture,
+        given_name,
+      }));
       try {
         //chamamos o nosso servidor backend passando as mesmas informacoes pessoais que o google nos forneceu
         const res = await axios.post("http://localhost:8080/api/users", {
@@ -69,11 +97,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logout = () => {
     //removemos o token do cliente e logo apos removemos o estado LoggedIn
     localStorage.removeItem("token-acesso");
+    localStorage.removeItem("user-data");
     setLoggedIn(false);
   };
 
+  useEffect(() => {
+    //atualizamos as informacoes do usuario localmente
+    localStorage.setItem("user-data", JSON.stringify(userData));
+  }, [userData]);
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, errors }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, login, logout, errors, userData }}
+    >
       {children}
     </AuthContext.Provider>
   );
