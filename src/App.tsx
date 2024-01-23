@@ -7,15 +7,14 @@ import NotFound from "./components/layout/NotFound";
 
 function App() {
   return (
-    <div className="flex flex-row gap-2">
+    <div className="flex flex-row gap-2 bg-background w-screen h-screen">
       <Router>
-        <SideBar />
-        <div className="flex flex-col gap-5 my-8">
+        <SideBar>
           <Routes>
             <Route path="/*" element={<NotFound />} />
             <Route path="/home" element={<Home />}></Route>
           </Routes>
-        </div>
+        </SideBar>
       </Router>
     </div>
   );

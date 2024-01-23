@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { ReactNode, useState } from "react";
 import SideBarItem from "./SideBarItem";
+import LoginButton from "../ui/LoginButton";
 
-function SideBar() {
+function SideBar({ children }: { children: ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleToggleSidebar = () => {
@@ -9,69 +10,95 @@ function SideBar() {
   };
 
   return (
-    <div className="flex flex-row gap-1 items-center justify-center">
-      <div
-        className={`container flex flex-col justify-between items-center bg-darker text-white py-8 px-5 w-max h-screen`}
-      >
-        <nav className="flex flex-col items-center gap-3">
-          <SideBarItem
-            name="Harmony Hub"
-            icon="/main-logo.svg"
-            color="primary"
-            path="/"
-            isOpen={isSidebarOpen}
-          />
-          <div className="nav-item flex flex-col gap-3 items-center py-5">
+    <>
+      <div className="flex flex-row gap-0 md:gap-1 md:items-center justify-start md:justify-center">
+        <div
+          className={`container flex flex-col justify-between items-center bg-darker text-white md:p-5 px-2 py-4 md:w-max h-screen transition-transform duration-300 ${
+            !isSidebarOpen && "hidden md:flex"
+          }`}
+        >
+          <nav className="md:flex flex-col items-center gap-3">
             <SideBarItem
-              name="Home"
-              icon="home.svg"
-              color="white"
-              path="/home"
+              name="Harmony Hub"
+              icon="/main-logo.svg"
+              color="primary"
+              path="/"
               isOpen={isSidebarOpen}
             />
-            <SideBarItem
-              name="Habits"
-              icon="correct.svg"
-              color="white"
-              path="/habits"
-              isOpen={isSidebarOpen}
+            <div className="nav-item flex flex-col gap-3 items-center py-5">
+              <SideBarItem
+                name="Home"
+                icon="home.svg"
+                color="white"
+                path="/home"
+                isOpen={isSidebarOpen}
+              />
+              <SideBarItem
+                name="Habits"
+                icon="correct.svg"
+                color="white"
+                path="/habits"
+                isOpen={isSidebarOpen}
+              />
+              <SideBarItem
+                name="Motivational"
+                icon="heart.svg"
+                color="white"
+                path="/motivational"
+                isOpen={isSidebarOpen}
+              />
+            </div>
+          </nav>
+          <nav>
+            <div className="nav-item flex flex-col gap-3 items-center py-5">
+              <SideBarItem
+                name="Settings"
+                icon="settings.svg"
+                color="white"
+                path="/settings"
+                isOpen={isSidebarOpen}
+              />
+              <LoginButton
+                name="Sign in with Google"
+                icon="google-logo.svg"
+                isOpen={isSidebarOpen}
+              />
+            </div>
+          </nav>
+        </div>
+        <img
+          src="/open-close.svg"
+          onClick={handleToggleSidebar}
+          className={`transition-transform duration-300 cursor-pointer p-2 md:block hidden ${
+            isSidebarOpen ? "rotate-0" : "rotate-180"
+          }`}
+        />
+        {isSidebarOpen ? (
+          <span>
+            <img
+              src="close.svg"
+              className="ml-5 my-6 w-10 md:hidden block overflow-hidden"
+              onClick={handleToggleSidebar}
             />
-            <SideBarItem
-              name="Motivational"
-              icon="heart.svg"
-              color="white"
-              path="/motivational"
-              isOpen={isSidebarOpen}
+          </span>
+        ) : (
+          <span className=" absolute w-full md:hidden">
+            <img
+              src="menu.svg"
+              className="ml-5 my-6 w-10 md:hidden block"
+              onClick={handleToggleSidebar}
             />
-          </div>
-        </nav>
-        <nav>
-          <div className="nav-item flex flex-col gap-3 items-center py-5">
-            <SideBarItem
-              name="Settings"
-              icon="settings.svg"
-              color="white"
-              path="/settings"
-              isOpen={isSidebarOpen}
-            />
-            <SideBarItem
-              name="Sign In"
-              icon="correct.svg"
-              color="white"
-              path="/login"
-              isOpen={isSidebarOpen}
-            />
-          </div>
-        </nav>
+          </span>
+        )}
       </div>
-      <img
-        src="/open-close.svg"
-        onClick={handleToggleSidebar}
-        className={`transition-transform duration-300 cursor-pointer p-2 ${
-          isSidebarOpen ? "rotate-180" : "rotate-0"
+      <div
+        className={`flex flex-col gap-5 md:my-8 my-20 px-2 ${
+          isSidebarOpen && "hidden md:flex"
         }`}
-      />
-    </div>
+      >
+        {children}
+      </div>
+    </>
   );
 }
 
