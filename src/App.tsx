@@ -8,24 +8,22 @@ import { AuthProvider } from "./AtuhContext";
 
 function App() {
   return (
-    <div className="flex flex-row gap-2 bg-background text-off_white w-full h-max">
-      <Router>
-        <AuthProvider>
-          <Routes>
-            <Route path="*" element={<NotFound />} />
-            <Route path="/" element={<LandingPage />} />
-            <Route
-              path="/home"
-              element={
-                <PrivateRoute redirectPath="/">
-                  <Home />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </AuthProvider>
-      </Router>
-    </div>
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute redirectPath="/">
+                <Home />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </AuthProvider>
+    </Router>
   );
 }
 

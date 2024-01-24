@@ -2,7 +2,7 @@ import { ReactNode, useState } from "react";
 import SideBarItem from "./SideBarItem";
 import LoginButton from "../ui/LoginButton";
 
-function SideBar({ children }: { children: ReactNode }) {
+function SideBar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleToggleSidebar = () => {
@@ -11,9 +11,9 @@ function SideBar({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div className="flex flex-row gap-0 lg:gap-1 lg:items-center justify-start lg:justify-center">
+      <div className="h-max w-max absolute flex flex-row gap-0 lg:gap-1 justify-start">
         <div
-          className={`container flex flex-col justify-between items-center bg-darker text-off_white lg:p-5 px-2 py-4 lg:w-max h-screen transition-transform duration-300 ${
+          className={`flex flex-col justify-between items-center bg-darker text-off_white lg:p-5 px-2 py-4 lg:w-max w-max h-screen transition-transform duration-300 ${
             !isSidebarOpen && "hidden lg:flex"
           }`}
         >
@@ -66,23 +66,29 @@ function SideBar({ children }: { children: ReactNode }) {
             </div>
           </nav>
         </div>
-        <img
-          src="/open-close.svg"
+        <span
+          className="mt-16 ml-[-20px] hidden lg:block bg-darker w-max h-max px-[8px] py-[8px] rounded-full hover:bg-background transition-colors duration-300"
           onClick={handleToggleSidebar}
-          className={`transition-transform duration-300 cursor-pointer p-2 lg:block hidden ${
-            isSidebarOpen ? "rotate-0" : "rotate-180"
-          }`}
-        />
+        >
+          <img
+            src="open-close.svg"
+            className={`h-4 transition-transform duration-300 ${
+              !isSidebarOpen && "rotate-180"
+            }`}
+          />
+        </span>
+      </div>
+      <div className="">
         {isSidebarOpen ? (
-          <span>
+          <span className="absolute left-64 w-max lg:hidden">
             <img
               src="close.svg"
-              className="ml-5 my-6 w-10 lg:hidden block overflow-hidden"
+              className="ml-5 my-6 w-10 lg:hidden block"
               onClick={handleToggleSidebar}
             />
           </span>
         ) : (
-          <span className=" absolute w-full lg:hidden">
+          <span className="absolute w-max lg:hidden">
             <img
               src="menu.svg"
               className="ml-5 my-6 w-10 lg:hidden block"
@@ -90,13 +96,6 @@ function SideBar({ children }: { children: ReactNode }) {
             />
           </span>
         )}
-      </div>
-      <div
-        className={`flex flex-col gap-5 lg:my-8 my-20 px-2 ${
-          isSidebarOpen && "hidden lg:flex"
-        }`}
-      >
-        {children}
       </div>
     </>
   );
