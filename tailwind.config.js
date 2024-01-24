@@ -7,6 +7,10 @@ export default {
         primary: "#8D6CCF",
         background: "#1E1E1E",
         darker: "#101010",
+        off_white: "#FFFFF2",
+      },
+      backgroundImage: {
+        footer: "url('/footer-bg.png')",
       },
     },
   },
