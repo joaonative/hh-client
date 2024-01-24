@@ -11,13 +11,13 @@ function SideBar({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div className="flex flex-row gap-0 md:gap-1 md:items-center justify-start md:justify-center">
+      <div className="flex flex-row gap-0 lg:gap-1 lg:items-center justify-start lg:justify-center">
         <div
-          className={`container flex flex-col justify-between items-center bg-darker text-white md:p-5 px-2 py-4 md:w-max h-screen transition-transform duration-300 ${
-            !isSidebarOpen && "hidden md:flex"
+          className={`container flex flex-col justify-between items-center bg-darker text-off_white lg:p-5 px-2 py-4 lg:w-max h-screen transition-transform duration-300 ${
+            !isSidebarOpen && "hidden lg:flex"
           }`}
         >
-          <nav className="md:flex flex-col items-center gap-3">
+          <nav className="lg:flex flex-col items-center gap-3">
             <SideBarItem
               name="Harmony Hub"
               icon="/main-logo.svg"
@@ -69,7 +69,7 @@ function SideBar({ children }: { children: ReactNode }) {
         <img
           src="/open-close.svg"
           onClick={handleToggleSidebar}
-          className={`transition-transform duration-300 cursor-pointer p-2 md:block hidden ${
+          className={`transition-transform duration-300 cursor-pointer p-2 lg:block hidden ${
             isSidebarOpen ? "rotate-0" : "rotate-180"
           }`}
         />
@@ -77,23 +77,23 @@ function SideBar({ children }: { children: ReactNode }) {
           <span>
             <img
               src="close.svg"
-              className="ml-5 my-6 w-10 md:hidden block overflow-hidden"
+              className="ml-5 my-6 w-10 lg:hidden block overflow-hidden"
               onClick={handleToggleSidebar}
             />
           </span>
         ) : (
-          <span className=" absolute w-full md:hidden">
+          <span className=" absolute w-full lg:hidden">
             <img
               src="menu.svg"
-              className="ml-5 my-6 w-10 md:hidden block"
+              className="ml-5 my-6 w-10 lg:hidden block"
               onClick={handleToggleSidebar}
             />
           </span>
         )}
       </div>
       <div
-        className={`flex flex-col gap-5 md:my-8 my-20 px-2 ${
-          isSidebarOpen && "hidden md:flex"
+        className={`flex flex-col gap-5 lg:my-8 my-20 px-2 ${
+          isSidebarOpen && "hidden lg:flex"
         }`}
       >
         {children}

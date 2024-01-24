@@ -15,7 +15,7 @@ function SideBarItem({ name, icon, color, path, isOpen }: ItemProps) {
 
   const colorVariants = {
     primary: "text-primary",
-    white: "text-white",
+    white: "text-off_white",
   };
 
   return (
@@ -28,11 +28,11 @@ function SideBarItem({ name, icon, color, path, isOpen }: ItemProps) {
         <img
           src={icon}
           alt={`${name} icon`}
-          className="md:w-8 md:h-8 w-10 transition-all duration-300"
+          className="lg:w-8 lg:h-8 w-10 transition-all duration-300"
         />
 
         {isOpen && (
-          <h1 className={`${colorVariants[color]} md:w-36 w-40 text-base`}>
+          <h1 className={`${colorVariants[color]} lg:w-36 w-40 text-base`}>
             {name}
           </h1>
         )}
