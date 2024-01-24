@@ -11,32 +11,15 @@ This project leverages a robust tech stack to build Harmony Hub, a mental wellne
 - React OAuth Google: v0.12.1
 - Framer Motion: v11.0.1
 - Axios: v1.6.5
-- JS Cookie: v3.0.5
-
-### Backend
-
-- MongoDB: Mongoose for database interaction
-- Express: Web application framework for Node.js
-- Typescript: Enhancing code maintainability and readability
-- Dotenv: Managing environment variables
-
-## Getting Started
-
-1. Clone the repository.
-2. Install dependencies: `npm install`.
-3. Set up the backend: Configure MongoDB and environment variables in the .env file.
-4. Run the frontend: `npm run dev`.
-
+  
 ## Features
 
 - Google Login: Authenticate via Google accounts.
 - Habit Creation: Easily create and customize habits.
+- Report Creation: Easily create and share user reports.
 - Monthly Dashboard: Visualize habits efficiently on the Home tab.
+- Daily Streak: Visualize and share your daily streak on the Home tab.
 
 ## Contributions
 
-Contributions are welcome! Follow the contribution guidelines.
-
-## License
-
-This project is licensed under the MIT License.
+Just a studty project.
