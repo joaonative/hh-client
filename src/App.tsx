@@ -1,20 +1,29 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import PrivateRoute from "./PrivateRoute";
-import Home from "./pages/Home";
-import SideBar from "./components/layout/SideBar";
 import "./index.css";
+import Home from "./pages/Home";
+import PrivateRoute from "./PrivateRoute";
 import NotFound from "./components/layout/NotFound";
+import LandingPage from "./pages/LandingPage";
+import { AuthProvider } from "./AtuhContext";
 
 function App() {
   return (
-    <div className="flex flex-row gap-2 bg-background w-screen h-screen">
+    <div className="flex flex-row gap-2 bg-background text-off_white w-full h-max">
       <Router>
-        <SideBar>
+        <AuthProvider>
           <Routes>
-            <Route path="/*" element={<NotFound />} />
-            <Route path="/home" element={<Home />}></Route>
+            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute redirectPath="/">
+                  <Home />
+                </PrivateRoute>
+              }
+            />
           </Routes>
-        </SideBar>
+        </AuthProvider>
       </Router>
     </div>
   );
