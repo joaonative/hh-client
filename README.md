@@ -1,30 +1,39 @@
-# React + TypeScript + Vite
+Harmony Hub - React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project utilizes a robust tech stack to create Harmony Hub, a mental wellness application aimed at habit tracking. Users can log in through Google, explore an informative introduction, create personalized habits, and conveniently monitor them on the monthly dashboard within the Home tab.
+Tech Stack
+Frontend
 
-Currently, two official plugins are available:
+    React: v18.2.0
+    React Router DOM: v6.21.3
+    React OAuth Google: v0.12.1
+    Framer Motion: v11.0.1
+    Axios: v1.6.5
+    JS Cookie: v3.0.5
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Backend
 
-## Expanding the ESLint configuration
+    MongoDB: Mongoose for database interaction
+    Express: Web application framework for Node.js
+    Typescript: Enhancing code maintainability and readability
+    Dotenv: Managing environment variables
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Getting Started
 
-- Configure the top-level `parserOptions` property like this:
+    Clone the repository.
+    Install dependencies: npm install.
+    Set up the backend: Configure MongoDB and environment variables in the .env file.
+    Run the frontend: npm run dev.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Features
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+    Google Login: Authenticate via Google accounts.
+    Habit Creation: Easily create and customize habits.
+    Monthly Dashboard: Visualize habits efficiently on the Home tab.
+
+Contributions
+
+Contributions are welcome! Follow the contribution guidelines.
+License
+
+This project is licensed under the MIT License.
