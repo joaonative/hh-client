@@ -10,8 +10,8 @@ import {
 //props do contexto
 interface AuthContextProps {
   isLoggedIn: boolean;
-  login: (access_token: string) => Promise<void>;
-  logout: () => void;
+  login: (access_token: string, onLoginCallback?: () => void) => Promise<void>;
+  logout: (onLogoutCallback?: () => void) => void;
   errors: string;
   userData: UserData | null;
 }
@@ -46,7 +46,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return existingToken ? true : false;
   });
 
-  const login = async (access_token: string) => {
+  const login = async (access_token: string, onLoginCallback?: () => void) => {
     try {
       //fazemos a chamada ao servidor do google para solicitarmos as informacoes privadas dos usuarios de forma autorizada
       const googleRes = await axios.get(
@@ -60,7 +60,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       //guardamos a resposta do google
       const { name, email, picture, given_name } = googleRes.data;
-      console.log(googleRes.data);
       setUserData((prevUserData) => ({
         ...prevUserData,
         name,
@@ -86,6 +85,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         //por fim definimos o estado LoggedIn para verdadeiro
         setLoggedIn(true);
+
+        if (onLoginCallback) {
+          onLoginCallback();
+        }
       } catch (error) {
         setErrors("Login error with backend server");
       }
@@ -94,11 +97,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const logout = () => {
+  const logout = (onLogoutCallback?: () => void) => {
     //removemos o token do cliente e logo apos removemos o estado LoggedIn
     localStorage.removeItem("token-acesso");
     localStorage.removeItem("user-data");
+
     setLoggedIn(false);
+
+    if (onLogoutCallback) {
+      onLogoutCallback();
+    }
   };
 
   useEffect(() => {
