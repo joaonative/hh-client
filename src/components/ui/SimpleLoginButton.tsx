@@ -1,6 +1,7 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AtuhContext";
+import Button from "./Button";
 
 interface SimpleLoginButtonProps {
   name: string;
@@ -30,21 +31,12 @@ function SimpleLoginButton({ name, primary }: SimpleLoginButtonProps) {
 
   return (
     <>
-      {primary ? (
-        <button
-          className="px-3 py-1 border text-darker bg-primary border-primary"
-          onClick={handleLogin}
-        >
-          {name}
-        </button>
-      ) : (
-        <button
-          className="px-3 py-1 border border-off_white hover:bg-off_white hover:text-darker transition-colors duration-300"
-          onClick={handleLogin}
-        >
-          {name}
-        </button>
-      )}
+      <Button
+        name={name}
+        handleClick={handleLogin}
+        primary={primary}
+        secondary={!primary}
+      />
     </>
   );
 }
