@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="h-max w-full flex flex-col items-start gap-4 lg:gap-10 bg-footer bg-cover pt-4 lg:pt-12">
+    <footer className="mt-10 h-max w-full flex flex-col items-start gap-4 lg:gap-10 bg-footer bg-cover pt-2 lg:pt-4">
       <div className="w-full h-max flex flex-col items-center justify-center gap-3">
         <h1 className=" text-lg lg:text-4xl">Study project!</h1>
         <h2 className="text-sm lg:text-xl text-center px-2">
@@ -9,14 +9,22 @@ function Footer() {
           and was made for the purposes of programming and design studies.
         </h2>
       </div>
-      <div className="w-full h-max text-center text-base bg-darker p-1">
-        made & desined by João Victor{" "}
+      <div className="w-full h-max text-center text-base bg- p-1">
+        made & desined by {""}
         <a
           href="https://github.com/joaonative"
           target="_blank"
           className="text-blue-400"
         >
           @joaonative
+        </a>{" "}
+        &{" "}
+        <a
+          href="https://github.com/joaosiqueirx"
+          target="_blank"
+          className="text-blue-400"
+        >
+          @joaosiqueirx
         </a>
       </div>
     </footer>

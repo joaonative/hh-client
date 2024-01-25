@@ -72,7 +72,7 @@ function SideBar() {
         >
           <img
             src="open-close.svg"
-            className={`h-4 transition-transform duration-300 ${
+            className={`cursor-pointer h-4 transition-transform duration-300 ${
               !isSidebarOpen && "rotate-180"
             }`}
           />
