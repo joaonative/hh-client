@@ -14,3 +14,23 @@ body {
   background-color: #1e1e1e;
   color: #fffff2;
 }
+
+input:focus {
+  outline: none;
+  border: 1px solid #9747ff;
+}
+
+.custom-gradient-text {
+  background: radial-gradient(
+    circle,
+    var(--gradient-from) 0%,
+    var(--gradient-to) 100%
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+:root {
+  --gradient-from: #835ed9;
+  --gradient-to: #8030ff;
+}
