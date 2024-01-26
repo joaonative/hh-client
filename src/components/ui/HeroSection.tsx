@@ -6,7 +6,7 @@ function HeroSection() {
       <div className="flex flex-col gap-3 lg:gap-6">
         <h1 className="text-5xl">
           Take care of <br /> your{" "}
-          <span className="text-primary">mental health</span>
+          <span className="custom-gradient-text">mental health</span>
         </h1>
         <h2 className="font-medium text-2xl">
           Track positive habits effortlessly, <br />
@@ -17,9 +17,7 @@ function HeroSection() {
         </h2>
         <div className="w-max h-max flex flex-row gap-6">
           <SimpleLoginButton name="Try it now" primary />
-          <span className="px-2 py-1 text-off_white border border-off_white text-base">
-            it's free
-          </span>
+          <SimpleLoginButton name="Its free" />
         </div>
       </div>
       <img src="hero-1.svg" alt="Tracking progress" className="lg:h-96 h-72" />

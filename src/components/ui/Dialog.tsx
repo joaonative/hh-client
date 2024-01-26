@@ -35,10 +35,10 @@ function Dialog({
       transition={{ duration: 0.5 }}
       className="fixed inset-0 flex items-center justify-center z-50"
     >
-      <div className="flex flex-col items-center justify-center gap-5 bg-darker border border-background px-10 py-5 rounded-xl">
+      <div className="flex flex-col items-center justify-center gap-5 bg-darker border border-background px-10 py-5 rounded-lg">
         <h1 className="text-xl">{message}</h1>
         <div className="flex items-center justify-center gap-5">
-          <Button name={confirmMessage} handleClick={handleConfirm} secondary />
+          <Button name={confirmMessage} handleClick={handleConfirm} primary />
           <Button name={cancelMessage} handleClick={handleCancel} danger />
         </div>
       </div>
