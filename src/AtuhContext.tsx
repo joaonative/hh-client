@@ -7,7 +7,12 @@ import {
   useEffect,
 } from "react";
 
-//props do contexto
+// Constantes de ambiente
+const API_BASE_URL =
+  import.meta.env.REACT_APP_API_BASE_URL || "http://localhost:8080/api";
+const GOOGLE_API_URL = "https://www.googleapis.com/oauth2/v3/userinfo";
+
+// Props do contexto
 interface AuthContextProps {
   isLoggedIn: boolean;
   login: (access_token: string, onLoginCallback?: () => void) => Promise<void>;
@@ -16,12 +21,12 @@ interface AuthContextProps {
   userData: UserData | null;
 }
 
-//props do provedor
+// Props do provedor
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-//dados do usuario logado
+// Dados do usuário logado
 interface UserData {
   name: string;
   given_name: string;
@@ -33,32 +38,23 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [errors, setErrors] = useState("");
-
   const [userData, setUserData] = useState<UserData | null>(() => {
-    // tentamos recuperar as informacoes do usuario ao iniciar a aplicacao
     const storedUserData = localStorage.getItem("user-data");
     return storedUserData ? JSON.parse(storedUserData) : null;
   });
-
   const [isLoggedIn, setLoggedIn] = useState<boolean>(() => {
-    //verifica se ja tem o token baseado no valor automaticamente devolve isLoggedIn como true
     const existingToken = localStorage.getItem("token-acesso");
     return existingToken ? true : false;
   });
 
   const login = async (access_token: string, onLoginCallback?: () => void) => {
     try {
-      //fazemos a chamada ao servidor do google para solicitarmos as informacoes privadas dos usuarios de forma autorizada
-      const googleRes = await axios.get(
-        "https://www.googleapis.com/oauth2/v3/userinfo",
-        {
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
-        }
-      );
+      const googleRes = await axios.get(GOOGLE_API_URL, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      });
 
-      //guardamos a resposta do google
       const { name, email, picture, given_name } = googleRes.data;
       setUserData((prevUserData) => ({
         ...prevUserData,
@@ -67,24 +63,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         picture,
         given_name,
       }));
+
       try {
-        //chamamos o nosso servidor backend passando as mesmas informacoes pessoais que o google nos forneceu
-        const res = await axios.post("http://localhost:8080/api/users", {
+        const res = await axios.post(`${API_BASE_URL}/users`, {
           name,
           email,
         });
 
-        //verificamos se o usuario acessou o prompt de login mesmo ja logado e se sim abortamos
         const existingToken = localStorage.getItem("token-acesso");
 
-        if (existingToken) {
-          return;
-        } else {
+        if (!existingToken) {
           localStorage.setItem("token-acesso", res.data.token);
+          setLoggedIn(true);
         }
-
-        //por fim definimos o estado LoggedIn para verdadeiro
-        setLoggedIn(true);
 
         if (onLoginCallback) {
           onLoginCallback();
@@ -98,10 +89,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const logout = (onLogoutCallback?: () => void) => {
-    //removemos o token do cliente e logo apos removemos o estado LoggedIn
     localStorage.removeItem("token-acesso");
     localStorage.removeItem("user-data");
-
     setLoggedIn(false);
 
     if (onLogoutCallback) {
@@ -110,7 +99,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    //atualizamos as informacoes do usuario localmente
     localStorage.setItem("user-data", JSON.stringify(userData));
   }, [userData]);
 
@@ -126,7 +114,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 export const useAuth = (): AuthContextProps => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth needs to be used inside a AuthProvider");
+    throw new Error("useAuth needs to be used inside an AuthProvider");
   }
   return context;
 };
