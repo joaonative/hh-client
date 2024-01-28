@@ -5,6 +5,7 @@ import PrivateRoute from "./PrivateRoute";
 import NotFound from "./components/layout/NotFound";
 import LandingPage from "./pages/LandingPage";
 import { AuthProvider } from "./AtuhContext";
+import Habits from "./pages/Habits";
 
 function App() {
   return (
@@ -18,6 +19,14 @@ function App() {
             element={
               <PrivateRoute redirectPath="/">
                 <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/habits"
+            element={
+              <PrivateRoute redirectPath="/">
+                <Habits />
               </PrivateRoute>
             }
           />
