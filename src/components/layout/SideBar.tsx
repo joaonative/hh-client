@@ -83,7 +83,7 @@ function SideBar() {
           <span className="absolute left-64 w-max lg:hidden">
             <img
               src="close.svg"
-              className="ml-5 my-6 w-10 lg:hidden block"
+              className="ml-5 my-7 w-7 lg:hidden block transition-all duration-700"
               onClick={handleToggleSidebar}
             />
           </span>
@@ -91,7 +91,7 @@ function SideBar() {
           <span className="absolute w-max lg:hidden">
             <img
               src="menu.svg"
-              className="ml-5 my-6 w-10 lg:hidden block"
+              className="ml-3 my-6 w-10 lg:hidden block transition-all duration-700"
               onClick={handleToggleSidebar}
             />
           </span>
