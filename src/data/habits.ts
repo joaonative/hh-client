@@ -7,8 +7,12 @@ const token = localStorage.getItem("token-acesso");
 export interface Habit {
   name: string;
   author: string;
-  frequency: number;
+  frequency?: number;
   description: string;
+  _id?: string;
+  goal: number;
+  isGood: boolean;
+  lastPerformed?: Date;
 }
 
 export interface HabitsApiResponse {
@@ -19,7 +23,9 @@ export interface HabitsApiResponse {
   } | null;
 }
 
-export async function getHabits(author: string): Promise<HabitsApiResponse> {
+export async function getHabits(
+  author: string | undefined
+): Promise<HabitsApiResponse> {
   try {
     const res = await axios.get(`${apiUrl}/habits`, {
       headers: {
@@ -29,6 +35,7 @@ export async function getHabits(author: string): Promise<HabitsApiResponse> {
     });
 
     const data = res.data;
+    console.log(data);
     return { data, error: null };
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -88,5 +95,17 @@ export async function createHabit(data: Habit) {
         },
       };
     }
+  }
+}
+
+export async function markAsDone(habitId: string) {
+  try {
+    await axios.put(`${apiUrl}/habits/${habitId}`, null, {
+      headers: {
+        Authorization: token,
+      },
+    });
+  } catch (err) {
+    return err;
   }
 }
