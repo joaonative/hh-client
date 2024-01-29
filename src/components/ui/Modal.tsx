@@ -5,24 +5,12 @@ import { ReactNode } from "react";
 interface ModalProps {
   message: string;
   confirmMessage?: string;
-  onConfirm?: () => void;
+  onConfirm?: (data?: any) => Promise<void>;
   onCancel?: () => void;
   children: ReactNode;
 }
 
-function Modal({
-  message,
-  confirmMessage,
-  onConfirm,
-  onCancel,
-  children,
-}: ModalProps) {
-  const handleConfirm = () => {
-    if (onConfirm) {
-      onConfirm();
-    }
-  };
-
+function Modal({ message, onCancel, children }: ModalProps) {
   const handleCancel = () => {
     if (onCancel) {
       onCancel();
@@ -42,12 +30,6 @@ function Modal({
           <Button handleClick={handleCancel} close />
         </div>
         {children}
-        <Button
-          name={confirmMessage}
-          handleClick={handleConfirm}
-          primary
-          full
-        />
       </div>
     </motion.div>
   );
