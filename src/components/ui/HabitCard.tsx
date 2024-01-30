@@ -19,10 +19,12 @@ function HabitCard({
   goal,
 }: HabitCardProps) {
   const [isDone, setIsDone] = useState(done);
+  const [isDisabled, setIsDisabled] = useState(done);
   const handleMark = () => {
     if (id) {
       markAsDone(id);
       setIsDone(!isDone);
+      setIsDisabled(true);
     }
   };
 
@@ -51,6 +53,7 @@ function HabitCard({
               isDone ? "text-green-500" : "text-red-500"
             }`}
             onClick={handleMark}
+            disabled={isDisabled}
           >
             <img
               src={isDone ? "done.svg" : "not-done.svg"}
