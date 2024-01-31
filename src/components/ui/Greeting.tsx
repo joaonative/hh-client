@@ -9,8 +9,8 @@ function Greeting() {
     : "";
   return (
     <div>
-      <h4 className="font-semibold text-xl w-full ">
-        Hi, {formattedName}! Welcome to {""}
+      <h4 className="font-semibold lg:text-xl text-base w-full ">
+        Hello, {formattedName}! Welcome to {""}
         <span className="text-primary">Harmony Hub.</span> Check your monthly
         insight:
       </h4>

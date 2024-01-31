@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import "chart.js/auto";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./lib/react-query.ts";

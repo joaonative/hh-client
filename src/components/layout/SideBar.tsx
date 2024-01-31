@@ -11,7 +11,7 @@ function SideBar() {
 
   return (
     <>
-      <div className="h-max w-max absolute flex flex-row gap-0 lg:gap-1 justify-start">
+      <div className=" fixed h-max w-max flex flex-row gap-0 lg:gap-1 justify-start">
         <div
           className={`flex flex-col justify-between items-center bg-darker text-off_white lg:p-5 px-2 py-4 lg:w-max w-max h-screen transition-transform duration-300 ${
             !isSidebarOpen && "hidden lg:flex"
