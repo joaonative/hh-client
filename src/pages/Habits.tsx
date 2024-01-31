@@ -3,7 +3,7 @@ import Container from "../components/layout/Container";
 import GridContainer from "../components/layout/GridContainer";
 import SideBar from "../components/layout/SideBar";
 import HabitCard from "../components/ui/HabitCard";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import {
   Habit,
   HabitsApiResponse,
@@ -51,8 +51,7 @@ function Habits() {
         isGood: isGoodValue,
       };
 
-      await createHabit(habitData);
-      window.location.reload();
+      await createHabitMutation.mutate(habitData);
     } catch (err) {
       alert("Error creating habit, please try again.");
     }
@@ -60,9 +59,16 @@ function Habits() {
 
   const author = userData?.email;
 
-  const { data: habits } = useQuery<HabitsApiResponse>({
+  const { data: habits, refetch } = useQuery<HabitsApiResponse>({
     queryKey: ["habits"],
     queryFn: async () => getHabits(author),
+  });
+
+  const createHabitMutation = useMutation(createHabit, {
+    onSuccess: () => {
+      refetch();
+      setIsModalOpen(false);
+    },
   });
 
   const cardVariants = {
@@ -116,6 +122,7 @@ function Habits() {
                     frequency={habit.frequency}
                     goal={habit.goal}
                     done={habit.lastPerformed && isToday(habit.lastPerformed)}
+                    onHabitDeleted={refetch}
                   />
                 </motion.div>
               ))}
