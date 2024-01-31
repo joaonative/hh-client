@@ -13,6 +13,7 @@ export default {
       },
       backgroundImage: {
         footer: "url('/footer-bg.png')",
+        streak: "url('/streak.png')",
       },
     },
   },
