@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { markAsDone } from "../../data/habits";
+import { deleteHabit, markAsDone } from "../../data/habits";
+import { useMutation } from "react-query";
 
 interface HabitCardProps {
   id?: string;
@@ -8,6 +9,7 @@ interface HabitCardProps {
   frequency?: number;
   done?: boolean;
   goal: number;
+  onHabitDeleted: () => void;
 }
 
 function HabitCard({
@@ -17,9 +19,18 @@ function HabitCard({
   frequency,
   done,
   goal,
+  onHabitDeleted,
 }: HabitCardProps) {
   const [isDone, setIsDone] = useState(done);
   const [isDisabled, setIsDisabled] = useState(done);
+
+  const deleteHabitMutation = useMutation(deleteHabit, {
+    onSuccess: () => {
+      setIsDisabled(true);
+      onHabitDeleted();
+    },
+  });
+
   const handleMark = () => {
     if (id) {
       markAsDone(id);
@@ -28,11 +39,25 @@ function HabitCard({
     }
   };
 
+  const handleDelete = () => {
+    if (id) {
+      deleteHabitMutation.mutate(id);
+    }
+  };
+
   return (
     <div className="col-span-1 bg-darker p-5 rounded-lg flex flex-col gap-10">
-      <div className="flex w-ful items-center gap-3">
-        <img src="book.svg" alt="" className="h-8" />
-        <h1 className="lg:w-80 w-30 text-xl text-start">{name}</h1>
+      <div className="flex justify-between items-center">
+        <div className="flex w-ful items-center gap-3">
+          <img src="book.svg" alt="" className="h-8" />
+          <h1 className="lg:w-80 w-30 text-xl text-start">{name}</h1>
+        </div>
+        <img
+          onClick={handleDelete}
+          src="delete.svg"
+          alt="delete icon"
+          className="transition-all duration-300 hover:scale-125 cursor-pointer"
+        />
       </div>
       <h2 className="text-half_text mt-[-20px] lg:w-[360px] lg:h-6 w-72 h-8 break-words">
         {description}
@@ -49,8 +74,8 @@ function HabitCard({
           </div>
         ) : (
           <button
-            className={`flex gap-3 items-center transition-colors ${
-              isDone ? "text-green-500" : "text-red-500"
+            className={`flex gap-3 items-center transition-colors duration-300 ${
+              isDone ? "text-primary" : "text-half_text"
             }`}
             onClick={handleMark}
             disabled={isDisabled}

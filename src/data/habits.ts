@@ -109,3 +109,15 @@ export async function markAsDone(habitId: string) {
     return err;
   }
 }
+
+export async function deleteHabit(habitId: string) {
+  try {
+    await axios.delete(`${apiUrl}/habits/${habitId}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+  } catch (err) {
+    return err;
+  }
+}
