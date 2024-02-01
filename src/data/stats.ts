@@ -20,7 +20,27 @@ export async function getUserStats(userId: string | undefined) {
         Authorization: token,
       },
     });
-    console.log(res.data);
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+}
+
+export interface Streak {
+  author: string;
+  streakCount: number;
+  weeklyDays: boolean[];
+  lastUpdate: Date;
+}
+
+export async function getUserStreak(author: string | undefined) {
+  try {
+    const res = await axios.get(`${apiUrl}/streak`, {
+      headers: {
+        Authorization: token,
+        author: author,
+      },
+    });
     return res.data;
   } catch (err) {
     return err;
