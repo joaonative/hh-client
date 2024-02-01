@@ -46,7 +46,7 @@ function HabitCard({
   };
 
   return (
-    <div className="col-span-1 bg-darker p-5 rounded-lg flex flex-col gap-10">
+    <div className="lg:col-span-1 col-span-3 row-span-3 bg-darker p-5 rounded-lg flex flex-col gap-10 h-max">
       <div className="flex justify-between items-center">
         <div className="flex w-ful items-center gap-3">
           <img src="book.svg" alt="" className="h-8" />
@@ -59,7 +59,7 @@ function HabitCard({
           className="transition-all duration-300 hover:scale-125 cursor-pointer"
         />
       </div>
-      <h2 className="text-half_text mt-[-20px] lg:w-[360px] lg:h-6 w-72 h-8 break-words">
+      <h2 className="text-half_text mt-[-20px] lg:w-[360px] lg:h-10 w-72 h-8 break-words">
         {description}
       </h2>
       <div className="flex w-full items-center justify-between text-half_text">

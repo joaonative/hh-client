@@ -11,7 +11,6 @@ import {
   getHabits,
 } from "../data/habits";
 import { useAuth } from "../AtuhContext";
-import ErrorPopUp from "../components/ui/Error";
 import { useState } from "react";
 import Input from "../components/ui/Input";
 import Modal from "../components/ui/Modal";
@@ -99,8 +98,6 @@ function Habits() {
       <SideBar />
       <Container>
         <GridContainer>
-          {habits?.error && <ErrorPopUp message={habits.error.message} />}
-
           {Array.isArray(habits?.data) && (
             <>
               {habits.data.map((habit, index) => (
@@ -130,6 +127,7 @@ function Habits() {
           )}
         </GridContainer>
       </Container>
+
       {isModalOpen && (
         <Modal
           confirmMessage="create"
