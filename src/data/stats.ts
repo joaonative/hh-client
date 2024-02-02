@@ -46,3 +46,18 @@ export async function getUserStreak(author: string | undefined) {
     return err;
   }
 }
+
+export async function getUserYearStats(email: string | undefined) {
+  try {
+    const res = await axios.get(`${apiUrl}/stats/${email}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    console.log(res.data);
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+}

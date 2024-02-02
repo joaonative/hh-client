@@ -1,6 +1,11 @@
 import { Line } from "react-chartjs-2";
 
-const LineChart = () => {
+interface LineChartProps {
+  lineData: any[];
+}
+
+const LineChart = ({ lineData }: LineChartProps) => {
+  const lineChartData = Object.values(lineData);
   const data = {
     labels: [
       "Jan",
@@ -19,7 +24,7 @@ const LineChart = () => {
     datasets: [
       {
         label: "Monthly Habits",
-        data: [10, 20, 15, 25, 30, 12, 24, 32, 12, 20, 23, 22],
+        data: lineChartData,
         borderColor: "#9747FF",
       },
     ],
