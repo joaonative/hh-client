@@ -50,14 +50,7 @@ function SideBar() {
             </div>
           </nav>
           <nav>
-            <div className="nav-item flex flex-col gap-3 items-center py-5">
-              <SideBarItem
-                name="Settings"
-                icon="settings.svg"
-                color="white"
-                path="/settings"
-                isOpen={isSidebarOpen}
-              />
+            <div className="nav-item flex flex-col items-center py-5">
               <LoginButton
                 name="Sign in with Google"
                 icon="google-logo.svg"

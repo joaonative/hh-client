@@ -9,7 +9,10 @@ function DayStreak({ count, weeklyDays }: DayStreakProps) {
   const formattedCount =
     count === 0 ? "00" : count < 10 ? `0${count}` : String(count);
   return (
-    <div className="lg:col-span-1 col-span-3 row-span-3 bg-darker p-5 rounded-lg flex flex-col gap-5 lg:h-80">
+    <div
+      className="lg:col-span-1 col-span-3 row-span-3 bg-darker p-5 rounded-lg flex flex-col gap-5 lg:h-80"
+      id="streak"
+    >
       <h1 className="text-xl">Current streak</h1>
       <div className="flex items-center gap-12 justify-center">
         <img

@@ -97,6 +97,10 @@ function Habits() {
     <>
       <SideBar />
       <Container>
+        <h1 className="font-semibold lg:text-xl text-base w-full py-3">
+          This is <span className="text-primary">the habits page</span>, here
+          you create and manage personal habits, whether good or bad
+        </h1>
         <GridContainer>
           {Array.isArray(habits?.data) && (
             <>
@@ -192,7 +196,7 @@ function Habits() {
       )}
       <Button
         handleClick={handleClick}
-        styleClass="absolute bottom-6 right-6"
+        styleClass="bottom-6 right-6 fixed"
         primary
         name="Create an habit"
       />

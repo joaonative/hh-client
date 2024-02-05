@@ -35,7 +35,6 @@ export async function getHabits(
     });
 
     const data = res.data;
-    console.log(data);
     return { data, error: null };
   } catch (error) {
     if (axios.isAxiosError(error)) {

@@ -59,7 +59,7 @@ function HabitCard({
           className="transition-all duration-300 hover:scale-125 cursor-pointer"
         />
       </div>
-      <h2 className="text-half_text mt-[-20px] lg:w-[360px] lg:h-10 w-72 h-8 break-words">
+      <h2 className="text-half_text mt-[-20px] lg:h-10 w-full h-8 break-words">
         {description}
       </h2>
       <div className="flex w-full items-center justify-between text-half_text">
