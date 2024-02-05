@@ -6,6 +6,7 @@ import NotFound from "./components/layout/NotFound";
 import LandingPage from "./pages/LandingPage";
 import { AuthProvider } from "./AtuhContext";
 import Habits from "./pages/Habits";
+import Motivational from "./pages/Motivational";
 
 function App() {
   return (
@@ -27,6 +28,14 @@ function App() {
             element={
               <PrivateRoute redirectPath="/">
                 <Habits />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/motivational"
+            element={
+              <PrivateRoute redirectPath="/">
+                <Motivational />
               </PrivateRoute>
             }
           />

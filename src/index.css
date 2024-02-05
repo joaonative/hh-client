@@ -20,6 +20,16 @@ input:focus {
   border: 1px solid #9747ff;
 }
 
+textarea:focus {
+  outline: none;
+  border: 1px solid #9747ff;
+}
+
+button:disabled {
+  background-color: #1e1e1e;
+  color: rgba(255, 255, 242, 0.5);
+}
+
 .custom-gradient-text {
   background: radial-gradient(
     circle,
