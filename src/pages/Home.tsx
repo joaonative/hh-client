@@ -16,8 +16,23 @@ import LineChart from "../components/ui/LineChart";
 import DayStreak from "../components/ui/DayStreak";
 import { useEffect, useState } from "react";
 import Loading from "../components/ui/Loading";
+import domtoimage from "dom-to-image";
+import { saveAs } from "file-saver";
 
 function Home() {
+  const handleCapture = () => {
+    const divToCapture = document.getElementById("streak");
+    if (divToCapture) {
+      domtoimage.toBlob(divToCapture).then((blob) => {
+        if (blob) {
+          saveAs(blob, `${userData?.name} current streak`);
+        } else {
+          console.error("Failed to create blob.");
+        }
+      });
+    }
+  };
+
   const { userData } = useAuth();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -87,6 +102,22 @@ function Home() {
                 />
               )}
             </GridContainer>
+            <div className="w-full flex lg:flex-row flex-col gap-2 lg:justify-between items-center">
+              <span className="text-half_text lg:text-base text-sm">
+                Complete habits consecutively to increase your streak, monitor
+                your monthly stats, always aiming for personal improvement.
+              </span>
+              <button
+                className="flex items-center gap-2 bg-darker rounded-lg p-2"
+                onClick={handleCapture}
+              >
+                <p className="text-primary lg:text-base text-xs w-max">
+                  Share your streak!
+                </p>
+
+                <img src="upload.svg" alt="upload icon" className="h-5 w-5" />
+              </button>
+            </div>
           </div>
         )}
       </Container>
